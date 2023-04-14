@@ -1,0 +1,156 @@
+body {
+  background-color: blanchedalmond;
+}
+
+.main-title{
+  text-align : center;
+  font-size: 20px;
+  font-style: oblique;
+  padding : 30px 0;
+  font-weight: bold;
+}
+
+.logo-container{
+  width: 100px;
+  height: auto;
+  margin: auto;
+  display: block;	
+  padding-top : 30px;
+}
+
+.upper-bar{
+  background-color: rgb(227, 200, 139);
+  width: 100%;
+  padding-left: 20px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.upper-bar-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.upper-bar-item{
+  background-color: blanchedalmond;
+  margin: 10px;
+  padding: 15px;
+  border: none;
+  font-weight: bold;
+  color: black;
+}
+
+.city-explanation-container{
+  height: 150px;
+  justify-content : center;
+}
+
+.city-explanation-container img{
+  vertical-align: bottom;
+  width: auto;
+  margin-right: 100px;
+}
+
+.city-explanation-container div{
+  width: 500px;
+  height: city-explanation-container/img;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin: 0%;
+  background-color: rgb(227, 200, 139);
+}
+
+.city-decision{
+  text-align : center;
+  width: 300px;
+  background-color: rgb(227, 200, 139);
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.app-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.travel-container{
+  width: 250px;
+  margin: 16px;
+  background-color: rgb(227, 200, 139);
+  color: black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.travel-container img{
+  max-width: 100%;
+}
+
+.travel-info{
+  text-align : center;
+  padding: 20px;
+}
+
+.travel-info h4{
+  margin: 0;
+}
+
+.blank{
+  font-size: 5px;
+}
+
+.form-item{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.id-box{
+  width: 500px;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.button{
+  margin-top: 30px;
+  background-color: rgb(227, 200, 139);
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-style: italic;
+  border-radius: 20px;
+  display: block;
+}
+
+.check-all{
+  text-align: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  font-size: 20px;
+  padding-bottom: 30px;
+}
+
+.choosecard{
+  text-align: center;
+}
+
+.selection{
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
