@@ -9,7 +9,6 @@ function KyotoInformationPage(){
     return (
         <div>
           <Header/>
-          <div><Link to="/"><img src="travel_img/logo.jpg" className="logo-container" alt="로고"/></Link></div>
           <div className="main-title">교토</div>
           <div className="city-explanation-container" style={{display: 'flex'}}>
                 <img src="travel_img/kyoto.jpg" alt="도쿄"/>
@@ -30,7 +29,7 @@ function KyotoInformationPage(){
               })
             }
           </div>
-          <div className="city-decision">코스 짜러 가기</div>
+          <Link to="/surveypage" style={{textDecoration:"none", color:"black"}}><div className="city-decision">코스 짜러 가기</div></Link>
         </div>
       );
 }

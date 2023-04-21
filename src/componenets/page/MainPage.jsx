@@ -9,7 +9,6 @@ function MainPage(){
     return (
         <div>
           <Header/>
-          <div><Link to="/"><img src="travel_img/logo.jpg" className="logo-container" alt="로고"/></Link></div>
           <div className="main-title">당신의 여행지를 골라주세요!</div>
           <div className="app-container">
             {

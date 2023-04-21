@@ -1,89 +1,78 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom";
-import Axios from 'axios';
-import { loginUser } from './user_action';
+import React from "react";
 import Header from './Header';
-import TypePage from './TypePage';
+import { signin } from "./ApiService";
+//import Button from "@material-ui/core/Button";
+//import TextField from "@material-ui/core/TextField";
+//import Grid from "@material-ui/core/Grid";
+//import Typography from "@material-ui/core/Typography";
+//import { Container } from "@material-ui/core";
+import {
+    Link,
+    TextField,
+    Container
+} from "@material-ui/core";
 
-function LogInPage() {
-    const [inputId, setInputId] = useState("");
-    const [inputPw, setInputPw] = useState("");
-  
-    const handleInputId = (e) => {
-        setInputId(e.target.value);
-    };
+class LogInPage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-    const handleInputPw = (e) => {
-        setInputPw(e.target.value);
-    };
-    
-    const navigate = useNavigate();
-    
-    const login = () => {
-        console.log("click login");
-        console.log("ID : ", inputId);
-        console.log("PW : ", inputPw);
-        Axios.post("http://letstrip.shop:8080/auth/login", {
-            email: inputId,
-            passwd: inputPw,
-          })
-          .then((res) => {
-            console.log(res);
-            console.log("res.data.userId :: ", res.data.userId);
-            console.log("res.data.msg :: ", res.data.msg);
-            if (res.data.email === undefined) {
-              // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-              console.log("======================", res.data.msg);
-              alert("입력하신 id 가 일치하지 않습니다.");
-            } else if (res.data.email === null) {
-              // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
-              console.log(
-                "======================",
-                "입력하신 비밀번호 가 일치하지 않습니다."
-              );
-              alert("입력하신 비밀번호가 일치하지 않습니다.");
-            } else if (res.data.email === inputId) {
-              // id, pw 모두 일치 userId = userId1, msg = undefined
-              console.log("======================", "로그인 성공");
-              sessionStorage.setItem("user_id", inputId); // sessionStorage에 id를 user_id라는 key 값으로 저장
-              sessionStorage.setItem("name", res.data.name); // sessionStorage에 id를 user_id라는 key 값으로 저장
-            }
-            // 작업 완료 되면 페이지 이동(새로고침)
-            navigate("/");
-          })
-          .catch();
-      };
-        
-    return(
-        <div>
-            <Header/>
-            <div><Link to="/"><img src="travel_img/logo.jpg" className="logo-container" alt="로고"/></Link></div>
-            <form style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                <div>
-                    <div className="main-title">Log In</div>
-                    <input
-                        type="email"
-                        className='id-box'
-                        placeholder="Email"
-                        name="input_id"
-                        value={inputId}
-                        onChange={handleInputId}
-                    />
-                    <h2> </h2>
-                    <input
-                        type="password"
-                        className="id-box"
-                        placeholder="Enter password"
-                        name="input_pw"
-                        value={inputPw}
-                        onChange={handleInputPw}
-                    />
-                    <h2> </h2>
-                    <button onClick={login} className='button'>Log In</button>
-                </div>
-            </form>
-        </div>
-    )
+    handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const email = data.get("email");
+        const password = data.get("password");
+        signin({email:email,password:password});
+    }
+
+    render() {
+        return(
+            <><Header /><Container component="main" maxWidth="xs">
+                <div className="main-title">로그인</div>
+                <form noValidate onSubmit={this.handleSubmit}>
+                    {" "}
+                    {/* */}
+                    <div container spacing={2}>
+                        <div item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label="이메일 주소"
+                                name="email"
+                                autoComplete="email" />
+                        </div>
+                        <h6> </h6>
+                        <div item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="password"
+                                label="패스워드"
+                                name="password"
+                                autoComplete="current-password" />
+                        </div>
+                        <div item xs={12} className="setcenter">
+                            <button
+                                className="button"
+                                type="submit"
+                            >
+                                로그인
+                            </button>
+                        </div>
+                        <div className="setcenter">
+                            <Link href="/signuppage" varient="body2" style={{ textDecoration: "none", color: "black"}}>
+                                <div className="setcenter" style={{textDecoration:"underline"}}>계정이 없습니까? 여기서 가입 해주세요.</div>
+                            </Link>
+                        </div>
+                    </div>
+                </form>
+            </Container></>
+        );
+    }
 }
 
 export default LogInPage;
