@@ -1,12 +1,8 @@
 import React from "react";
-import ShowMap from "./page/ShowMap";
 import ReadMoreLess from "./page/ReadMoreLess";
 
-const otherLocations = [
-];
-
-export default function Result(
-    {name,imgUrl,overview,address,localAddress,phoneNumber,latitude,longitude,sun,mon,tue,wed,thu,fri,sat,keywordImgUrl}) {
+export default function Result({name,imgUrl,overview,address,localAddress,phoneNumber,latitude,longitude,
+    sun,mon,tue,wed,thu,fri,sat,keywordImgUrl,id,arrive_time,depart_time,move_time}) {
     return (
         <div>
             <div style={{display: 'flex', paddingLeft:'20px', paddingRight:'20px'}}>
@@ -19,14 +15,15 @@ export default function Result(
                         <br/>
                         <div>설명 : {overview}</div>
                         <br/>
-
                     </div>
                 </div>
             </div>
-            <ReadMoreLess 
-                address={address} localAddress={localAddress} phoneNumber={phoneNumber}
+            <br/>
+            <ReadMoreLess
+                name={name} address={address} localAddress={localAddress} phoneNumber={phoneNumber}
                 latitude={latitude} longitude={longitude} keywordImgUrl={keywordImgUrl}
-                sun={sun} mon={mon} tue={tue} wed={wed} thu={thu} fri={fri} sat={sat}/>
+                sun={sun} mon={mon} tue={tue} wed={wed} thu={thu} fri={fri} sat={sat}
+                id={id} arrive_time={arrive_time} depart_time={depart_time} move_time={move_time}/>
             <br/>
         </div>
     )

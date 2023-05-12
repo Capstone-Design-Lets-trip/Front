@@ -194,7 +194,7 @@ export const resultdummy = [
             "latitude": 34.7040422381707,
             "longitude": 135.494877981182,
             "arrive_time": "2023-04-26 16:55:29",
-            "depart_time": "2023-04-26 19:55:29",
+            "depart_time": null,
             "move_time": 28,
             "keywordImgUrl": "https://letstrip-s3-bucket.s3.ap-northeast-2.amazonaws.com/osaka/%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B3+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%86%AB%E1%84%90%E1%85%B3+%E1%84%8B%E1%85%A9%E1%84%89%E1%85%A1%E1%84%8F%E1%85%A1.png"
         }

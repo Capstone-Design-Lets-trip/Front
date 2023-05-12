@@ -2,15 +2,15 @@ import React from "react";
 import Header from './Header';
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-
 import { useNavigate } from "react-router";
+import { UserEmail } from "./ApiService";
+import { resultdummy } from "../../resultdummy";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
@@ -19,7 +19,11 @@ import 'swiper/components/pagination/pagination.min.css'
 
 SwiperCore.use([Navigation, Pagination])
 
+export const myResult = [];
+
 export default function SurveyPage() {
+  const navigate = useNavigate();
+
   const [answers, setAnswers] = useState({
     inside_outside: '',
     mountain_ocean: '',
@@ -30,7 +34,8 @@ export default function SurveyPage() {
     endDate: new Date(),
     travel_start: new Date().toLocaleTimeString(),
     travel_end: new Date().toLocaleTimeString(),
-    properties: []
+    properties: [],
+    email: localStorage.getItem(UserEmail)
   });
 
   const handleChange = (e) => {
@@ -55,27 +60,23 @@ export default function SurveyPage() {
       }
   };
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log('Answers:', answers);
-      // fetch('http://letstrip.shop:5000/togo', {  // <-- Change the URL here
-      // http://127.0.0.1:5000/test_togo
-      fetch('http://letstrip.shop:5000/togo', {  // <-- Change the URL here
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(answers)
-      })
-          .then(response => response.json())
-          .then(data => console.log('Server response:', data))
-          .catch(error => console.error('Error:', error));
-  };
-
-  const navigate = useNavigate();
-
-  const gomyhotelpage = () => {
-    navigate("/myhotelpage");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Answers:', answers);
+    await fetch('http://letstrip.shop:5000/togo', {  // <-- Change the URL here
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+        body: JSON.stringify(answers)
+    })
+    .then(response => response.json())
+    .then(response => myResult.push(response))
+    .then(response => console.log(myResult))
+    .then(response => console.log(myResult[0]))
+    .then(response => console.log(resultdummy))
+    .catch(error => console.error('Error:', error));
+    navigate("/resultpage");
   };
 
   return (
@@ -91,8 +92,8 @@ export default function SurveyPage() {
                 <Form.Label>실내 vs 실외</Form.Label>
                 <Form.Control as="select" name="inside_outside" onChange={handleChange}>
                   <option value="">Select an option</option>
-                  <option value="'실내'">Inside</option>
-                  <option value="'실외'">Outside</option>
+                  <option value="'실내'">실내</option>
+                  <option value="'실외'">실외</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="mountain_ocean">
@@ -178,7 +179,7 @@ export default function SurveyPage() {
           </div>
         </Slider>
         <div className="setcenter">
-          <Button className="button" variant="primary" type="submit" onClick={gomyhotelpage}>
+          <Button className="button" variant="primary" type="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </div>

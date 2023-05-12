@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "./app-config";
 export const ACCESS_TOKEN="ACCESS_TOKEN";
+export const UserEmail="UserEmail";
 
 export function call(api,method,request) {
     let headers = new Headers({
@@ -41,6 +42,7 @@ export function signin(userDTO) {
         .then((response) => {
             if(response.token) {
                 localStorage.setItem(ACCESS_TOKEN,response.token);
+                localStorage.setItem(UserEmail,userDTO.email);
                 window.location.href="/";
             }
         });

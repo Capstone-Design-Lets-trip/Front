@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Travel from "../Travel";
-import { dummy } from "../../traveldummy";
+import { traveldummy } from "../../traveldummy";
 import Header from './Header';
 import ShowMap from "./ShowMap";
 
@@ -16,7 +16,7 @@ function MainPage(){
           <div className="main-title">당신의 여행지를 골라주세요!</div>
           <div className="app-container">
             {
-              dummy.results.map((item)=>{
+              traveldummy.map((item)=>{
                 return(
                   <Travel
                     destination={item.destination}

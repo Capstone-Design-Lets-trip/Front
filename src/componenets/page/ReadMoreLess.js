@@ -1,21 +1,49 @@
 import React, { useState } from "react";
+import { UserEmail } from "./ApiService";
 
-function ReadMoreLess({address,localAddress,phoneNumber,latitude,longitude,sun,mon,tue,wed,thu,fri,sat,keywordImgUrl}) {
+function ReadMoreLess({name,address,localAddress,phoneNumber,latitude,longitude,
+  sun,mon,tue,wed,thu,fri,sat,keywordImgUrl,id,arrive_time,depart_time,move_time}) {
   const [isShowMore, setIsShowMore] = useState(false);
+
+  const [emailName, setEmailName] = useState({
+    email: localStorage.getItem(UserEmail),
+    name: name
+  });
 
   const toggleReadMoreLess = () => {
     setIsShowMore(!isShowMore);
+    fetch('http://letstrip.shop:5000/to_update', {  // <-- Change the URL here
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+          body: JSON.stringify(emailName)
+      })
+      .then(response => response.json())
   };
 
   return (
     <div>
       {isShowMore && (
-        <p>
+        <div>
           <div style={{display:"flex", padding:"0px 20px"}}>
-            <div>
+            <div className="result-info">
               <img src={keywordImgUrl} style={{height:"200px"}} alt="도쿄"/>
             </div>
-            <div>
+            <div style={{textAlign:"center"}}>
+              <div>출발 시간 : {arrive_time}</div>
+              {depart_time!==null?
+                <div>
+                  <br/>
+                  도착 시간 : {depart_time}
+                </div>
+                :
+                <div>
+                  <br/>
+                  도착 시간 : (출발지입니다.)
+                </div>
+              }
+              <br/>
               <div>주소 : {address}</div>
               <br/>
               <div>현지주소 : {localAddress}</div>
@@ -40,10 +68,8 @@ function ReadMoreLess({address,localAddress,phoneNumber,latitude,longitude,sun,m
             </div>
           </div>
           <br/>
-        </p>
-        
+        </div>
       )}
-
       <button onClick={toggleReadMoreLess}>
         {isShowMore ? "접기" : "더보기"}
       </button>
