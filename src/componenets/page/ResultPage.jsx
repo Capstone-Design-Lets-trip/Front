@@ -63,24 +63,24 @@ export default function ResultPage() {
     console.log('MyFavorite:', myFavorite);
     const accessToken = localStorage.getItem("ACCESS_TOKEN");
     let options = {
-        headers: {"Content-Type":"application/json",
-          "Authorization":"Bearer "+accessToken
-        },
-        url:'http://letstrip.shop:8080/scrap/save',
-        method:"POST",
+      headers: {"Content-Type":"application/json",
+        "Authorization":"Bearer "+accessToken
+      },
+      url:'http://letstrip.shop:8080/scrap/save',
+      method:"POST",
     }
     options.body = JSON.stringify(myFavorite[index]);
     console.log('헤더:', options);
     fetch(options.url,options)
-    .then(response => response.text());
+    .then(response => response)
+    .then(response => {alert("해당 코스가 저장되었습니다!")});
   };
 
   return (
     <div className="App">
       <Header/>
-      <div className="main-title">여행 일정을 확인해주세요!</div>
-      
-      <div style={{width:750, margin: "Auto", backgroundColor:"rgb(227, 200, 139)", position:"relative"}}>
+      <div className="main-title">여행 일정을 확인해주세요!</div> 
+      <div style={{width:"750px" ,margin: "Auto", backgroundColor:"rgb(227, 200, 139)", position:"relative"}}>
         <Slider>
           {
             myResult[0].map((items,index) => {
@@ -95,9 +95,10 @@ export default function ResultPage() {
                     <ShowMap SO={otherLocations[index]}/>
                   </div>
                   {
-                    items.map((item) => {
+                    items.map((item,index) => {
                       return(
                         <Result
+                          index={index}
                           name={item.name}
                           imgUrl={item.imgUrl}
                           overview={item.overview}

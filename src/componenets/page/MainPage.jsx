@@ -10,26 +10,26 @@ const otherLocations = [
 ];
 
 function MainPage(){
-    return (
-        <div>
-          <Header/>
-          <div className="main-title">당신의 여행지를 골라주세요!</div>
-          <div className="app-container">
-            {
-              traveldummy.map((item)=>{
-                return(
-                  <Travel
-                    destination={item.destination}
-                    site={item.site}
-                    travel_pic={item.travel_pic}
-                    overview={item.overview}
-                  />
-                )
-              })
-            }
-          </div>
-        </div>
-      );
+  return (
+    <div>
+      <Header/>
+      <div className="main-title">당신의 여행지를 골라주세요!</div>
+      <div className="app-container">
+        {
+          traveldummy.map((item,index)=>{
+            return(
+              <Travel
+                destination={item.destination}
+                site={item.site}
+                travel_pic={item.travel_pic}
+                overview={item.overview}
+              />
+            )
+          })
+        }
+      </div>
+    </div>
+  );
 }
 
 export default MainPage;

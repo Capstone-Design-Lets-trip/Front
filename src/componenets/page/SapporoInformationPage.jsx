@@ -18,7 +18,7 @@ function SapporoInformationPage(){
           <div className="main-title">인기 여행지</div>
           <div className="app-container">
             {
-              citydummy.results.map((item)=>{
+              citydummy.map((item)=>{
                 return(
                   <City
                     destination={item.destination}

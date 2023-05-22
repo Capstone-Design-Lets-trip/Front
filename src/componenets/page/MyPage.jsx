@@ -2,26 +2,14 @@ import React from "react";
 import Header from './Header';
 import { useState } from "react";
 import FavoriteModal from './FavoriteModal';
-
-export const saveCourse = []
+import FavoriteModalCity from './FavoriteModalCity';
+import { resultdummy } from "../../resultdummy";
+import { favoritecities } from "../../favoritecities";
+import { saveCity } from "./Header";
+import { saveCourse } from "./Header";
 
 function MyPage(){
-  
-  const saveCourses = () => {
-    const accessToken = localStorage.getItem("ACCESS_TOKEN");
-    let options = {
-        headers: {"Content-Type":"application/json",
-          "Authorization":"Bearer "+accessToken
-        },
-        url:'http://letstrip.shop:8080/scrap/find/all',
-        method:"GET",
-    }
-    fetch(options.url,options)
-    .then(response => response.json())
-    .then(response => saveCourse.push(response))
-    .then(response => console.log('반환: ',response))
-    .then(response => console.log('불러: ',saveCourse));
-  };
+  console.log('마이페이지 여행지 불러: ',saveCity)
   
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -30,23 +18,45 @@ function MyPage(){
     setModalOpen(true);
   };
 
+  const [modalOpens, setModalOpens] = useState(false);
+
+    // 모달창 노출
+  const showModals = () => {
+    setModalOpens(true);
+  };
+
   return (
-     <div>
+    <div>
       <Header/>
       <div className="main-title">마이페이지</div>
-        <div className="setcenter">
-          <saveCourses/>
-          {
-            saveCourse.map((itemss,index)=>{
-              return(
-                <div>
-                  <button className="button" onClick={showModal}>{index+1}</button>
-                  {modalOpen && <FavoriteModal setModalOpen={setModalOpen} items={itemss} />}
-                </div>
-              )
-            })
-          }
-      </div>
+        <div style={{display: 'flex'}} className="setcenter">
+          <div style={{marginRight:"100px"}}>
+            <div className="main-title">찜한 여행지</div>
+            {
+              saveCity[0].map((itemss,index)=>{
+                return(
+                  <div>
+                    <button className="button" onClick={showModals}>{itemss.name}</button>
+                    {modalOpens && <FavoriteModalCity setModalOpens={setModalOpens} itemss={itemss} index={index}/>}
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div style={{marginLeft:"100px"}}>
+            <div className="main-title">찜한 여행코스</div>
+            {
+              saveCourse[0].map((items,index)=>{
+                return(
+                  <div>
+                    <button className="button" onClick={showModal}>{index+1}</button>
+                    {modalOpen && <FavoriteModal setModalOpen={setModalOpen} id={items.id} items={items.tourSpotDtoList}/>}
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
     </div>
   );
 }

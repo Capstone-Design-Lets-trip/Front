@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
 import ShowMap from "./ShowMap";
-import Result from "../Result";
+import ResultNoHeart from "../ResultNoHeart";
+import DeleteCoureseButton from "./DeleteCoureseButton";
 
-function FavoriteModal({ setModalOpen, items }) {
+function FavoriteModal({ setModalOpen, id, items }) {
     // 모달 끄기 
     const closeModal = () => {
         setModalOpen(false);
@@ -29,9 +29,10 @@ function FavoriteModal({ setModalOpen, items }) {
             </div>
             <br/>
             {
-                items.map((item) => {
+                items.map((item,index) => {
                     return(
-                        <Result
+                        <ResultNoHeart
+                            index={index}
                             name={item.name}
                             imgUrl={item.imgUrl}
                             overview={item.overview}
@@ -56,6 +57,7 @@ function FavoriteModal({ setModalOpen, items }) {
                     )
                 })
             }
+            <DeleteCoureseButton id={id}/>
         </div>
     );
 }

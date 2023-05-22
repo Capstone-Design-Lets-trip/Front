@@ -26,10 +26,14 @@ function ReadMoreLess({name,address,localAddress,phoneNumber,latitude,longitude,
     <div>
       {isShowMore && (
         <div>
-          <div style={{display:"flex", padding:"0px 20px"}}>
-            <div className="result-info">
+          <div style={{display:"flex", padding:"0px 20px"}} className="setcenter">
+            {name==="간사이 공항"||name==="오사카 국제공항"?
+              null
+            :
+            <div className="result-info" style={{paddingRight:'20px'}}>
               <img src={keywordImgUrl} style={{height:"200px"}} alt="도쿄"/>
             </div>
+            }
             <div style={{textAlign:"center"}}>
               <div>출발 시간 : {arrive_time}</div>
               {depart_time!==null?
@@ -43,6 +47,8 @@ function ReadMoreLess({name,address,localAddress,phoneNumber,latitude,longitude,
                   도착 시간 : (출발지입니다.)
                 </div>
               }
+              <br/>
+              <div>이동 시간 : {move_time}분</div>
               <br/>
               <div>주소 : {address}</div>
               <br/>
